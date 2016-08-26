@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var livereload = require('gulp-livereload');
 var $    = require('gulp-load-plugins')();
 
 var sassPaths = [
@@ -12,13 +13,15 @@ gulp.task('sass', function() {
       includePaths: sassPaths,
       outputStyle: 'expanded' // if css compressed **file size**
     })
-      .on('error', $.sass.logError))
+    .on('error', $.sass.logError))
     .pipe($.autoprefixer({
       browsers: ['last 2 versions', 'ie >= 9']
     }))
-    .pipe(gulp.dest('css'));
+    .pipe(gulp.dest('css'))
+    .pipe(livereload());
 });
 
 gulp.task('default', ['sass'], function() {
-  gulp.watch(['scss/**/*.scss'], ['sass']);
+  livereload.listen();
+  gulp.watch(['scss/**/*.scss', 'index.html'], ['sass']);
 });
