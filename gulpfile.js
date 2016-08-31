@@ -1,11 +1,21 @@
 var gulp = require('gulp');
 var livereload = require('gulp-livereload');
+var webserver = require('gulp-webserver');
 var $    = require('gulp-load-plugins')();
 
 var sassPaths = [
   'bower_components/foundation-sites/scss',
   'bower_components/motion-ui/src'
 ];
+
+gulp.task('webserver', function() {
+  gulp.src('.')
+    .pipe(webserver({
+      livereload: true,
+      directoryListing: true,
+      open: true
+    }));
+});
 
 gulp.task('sass', function() {
   return gulp.src('scss/app.scss')
