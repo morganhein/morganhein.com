@@ -31,7 +31,6 @@ gulp.task('sass', function() {
     .pipe(livereload());
 });
 
-gulp.task('default', ['sass'], function() {
-  livereload.listen();
+gulp.task('default', ['sass', 'webserver'], function() {
   gulp.watch(['scss/**/*.scss', 'index.html'], ['sass']);
 });
